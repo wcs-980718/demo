@@ -1,0 +1,28 @@
+/target/
+.worktrees/
+.mvn/wrapper/maven-wrapper.jar
+.idea
+*.iml
+.DS_Store
+.env
+
+# 本地测试文件不入库
+src/test/*
+!src/test/java/
+src/test/java/*
+!src/test/java/com/
+src/test/java/com/*
+!src/test/java/com/yiwei/
+src/test/java/com/yiwei/*
+!src/test/java/com/yiwei/midplat/
+src/test/java/com/yiwei/midplat/*
+!src/test/java/com/yiwei/midplat/fusion/
+!src/test/java/com/yiwei/midplat/capability/
+!src/test/java/com/yiwei/midplat/capability/**
+!src/test/java/com/yiwei/midplat/config/
+src/test/java/com/yiwei/midplat/config/*
+!src/test/java/com/yiwei/midplat/config/WebConfigTest.java
+!src/test/java/com/yiwei/midplat/config/FusionBrowserSessionTest.java
+
+# 中台内置智能体执行模块的回归测试
+!src/test/java/com/agenthubfusion/

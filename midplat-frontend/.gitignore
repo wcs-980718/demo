@@ -1,0 +1,44 @@
+node_modules
+dist
+.umi
+.umi-production
+.tmp
+.cache
+coverage
+.env.local
+.DS_Store
+.worktrees/
+
+# 本地测试文件不入库
+tests/*
+*.test.cjs
+*.test.js
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+*.spec.js
+
+# 融合入口回归随分支保存
+!tests/agentHubPreview.test.cjs
+!tests/devProxyOrigin.test.cjs
+!tests/createUuid.test.cjs
+!tests/fusionSession.test.cjs
+!tests/workflowGraph.test.cjs
+!tests/workflow.spec.cjs
+!tests/workflowFixture.cjs
+!tests/agentLifecycle.spec.cjs
+!tests/agentConfiguration.spec.cjs
+test-results/
+playwright-report/
+
+!tests/capabilityAssets.test.cjs
+!tests/qiankunHeader.test.cjs
+!tests/publicAsset.test.cjs
+!tests/homePresentation.test.cjs
+!tests/agentUsage.test.cjs
+!tests/usage.spec.cjs
+!tests/workspaceStyle.spec.cjs
+
+# 本地渲染验证临时脚本不入库
+_build/

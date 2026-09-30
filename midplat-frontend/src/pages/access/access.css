@@ -1,0 +1,112 @@
+/* W5 客户与凭证页样式：跟随中台深浅主题变量，复用 page-head / status / 面板约定 */
+.access-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 24px 40px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  color: var(--text);
+}
+.access-page .page-head { margin-bottom: 0; }
+.access-hero h2 { display: flex; align-items: center; gap: 10px; }
+.access-hero h2 svg { color: var(--navy); flex: none; }
+
+/* ---- 三栏：客户 / 接入应用 / 凭证与权限 ---- */
+.access-grid { display: grid; grid-template-columns: 280px 280px minmax(0, 1fr); gap: 14px; align-items: start; }
+@media (max-width: 1024px) { .access-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .access-card-wide { grid-column: 1 / -1; } }
+@media (max-width: 640px) { .access-grid { grid-template-columns: minmax(0, 1fr); } }
+.access-card {
+  min-width: 0;
+  min-height: 220px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.access-card h2 {
+  display: flex; align-items: center; gap: 8px; min-width: 0;
+  margin: 0 0 12px; padding-bottom: 10px;
+  font-size: 14px; font-weight: 600; color: var(--text);
+  border-bottom: 1px solid var(--line);
+}
+.access-card h3 { font-size: 12px; font-weight: 600; letter-spacing: .04em; margin: 0 0 8px; color: var(--muted); }
+.access-h2-sub { color: var(--muted); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.access-count {
+  margin-left: auto; flex: none;
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: .06em;
+  padding: 1px 8px; border-radius: 999px;
+  background: var(--surface-sunken); border: 1px solid var(--border); color: var(--muted);
+}
+
+/* ---- 列表项：图标 + 名称/标识 + 状态点 ---- */
+.access-list { display: flex; flex-direction: column; gap: 6px; }
+.access-item {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px;
+  text-align: left; width: 100%;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 9px 12px; background: transparent; cursor: pointer; color: inherit;
+  transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+.access-item:hover { border-color: var(--primary-line); background: var(--surface-sunken); }
+.access-item.active { border-color: var(--primary-line); background: var(--primary-lt); box-shadow: inset 2px 0 0 var(--primary); }
+.access-item-ic {
+  width: 26px; height: 26px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 7px; border: 1px solid var(--border);
+  background: var(--surface-sunken); color: var(--muted);
+}
+.access-item.active .access-item-ic { color: var(--primary); border-color: var(--primary-line); background: var(--primary-lt); }
+.access-item-main { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.access-item-main strong { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.access-item-main small { font-size: 11.5px; color: var(--muted); font-family: var(--font-mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.access-status { font-size: 11px; padding: 1px 9px; }
+.access-status.err { background: color-mix(in srgb, var(--rose) 12%, transparent); color: var(--rose); }
+
+.access-empty {
+  margin: 8px 0; padding: 18px 12px; text-align: center;
+  color: var(--muted); font-size: 12.5px;
+  border: 1px dashed var(--border); border-radius: var(--radius);
+}
+.access-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.access-hint { color: var(--muted); font-size: 12px; }
+
+/* ---- 权限上限子面板 ---- */
+.access-entitlements {
+  margin-bottom: 14px; padding: 12px 14px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface-sunken);
+}
+.access-entitlements ul { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.access-entitlements li { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.access-card code, .access-entitlements code {
+  font-family: var(--font-mono); font-size: 11.5px;
+  background: var(--surface-sunken); border: 1px solid var(--border);
+  padding: 1px 7px; border-radius: 6px; color: var(--text);
+}
+.access-entitlements li code { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.access-ent-form { display: grid; grid-template-columns: 150px minmax(0, 1fr) 110px auto; gap: 8px; margin-top: 8px; }
+.access-ent-form :is(.ant-select, .mp-ant-select), .access-ent-form :is(.ant-input, .mp-ant-input) { width: 100%; }
+@media (max-width: 768px) { .access-ent-form { grid-template-columns: minmax(0, 1fr); } }
+.access-row-actions { display: flex; gap: 4px; }
+
+/* ---- 弹窗表单与提示 ---- */
+.access-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 12px; }
+.access-form > label { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; font-size: 13px; font-weight: 500; color: var(--text); min-width: 0; }
+.access-form :is(.ant-select, .mp-ant-select), .access-form :is(.ant-input, .mp-ant-input) { width: 100%; }
+.access-note {
+  margin: 0; font-size: 13px; color: var(--muted); line-height: 1.55;
+  background: var(--surface-sunken); border: 1px solid var(--border); border-left: 2px solid var(--primary);
+  border-radius: var(--radius); padding: 10px 14px;
+}
+.access-secret { display: flex; flex-direction: column; gap: 12px; }
+.access-secret-box {
+  background: var(--surface-sunken); border: 1px dashed var(--border);
+  border-radius: var(--radius); padding: 12px; margin: 0;
+  font-family: var(--font-mono); font-size: 12px; word-break: break-all; white-space: pre-wrap;
+}
+.access-grant-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; }
+.access-grant-row:hover { background: var(--surface-sunken); }

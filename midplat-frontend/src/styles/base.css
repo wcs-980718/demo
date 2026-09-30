@@ -1,0 +1,87 @@
+/* ============================================================
+ * 基础元素与应用骨架（两种运行形态共用）
+ * 元素级规则一律限定在子应用根内部；html / body 只在 standalone 下触碰。
+ * :where() 保持与原先裸元素选择器相同的权重，页面类名规则照常可覆盖。
+ * ============================================================ */
+
+/* ---- standalone：本应用拥有整页 ---- */
+html:not(.midplat-in-qiankun),
+html:not(.midplat-in-qiankun) body,
+html:not(.midplat-in-qiankun) #root,
+#midplat-root,
+.midplat-frontend-root {
+  height: 100%; min-height: 100%;
+}
+html:not(.midplat-in-qiankun) body {
+  margin: 0;
+  color: var(--text); background: var(--bg);
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+/* ---- 子应用根：两种形态都由它绘制主题底色与字体 ---- */
+.midplat-frontend-root {
+  color: var(--text); background: var(--bg);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  scrollbar-color: rgba(148,163,184,.3) transparent;
+}
+:where(.midplat-frontend-root),
+:where(.midplat-frontend-root) *,
+:where(.midplat-frontend-root) *::before,
+:where(.midplat-frontend-root) *::after { box-sizing: border-box; }
+:where(.midplat-frontend-root) button,
+:where(.midplat-frontend-root) input,
+:where(.midplat-frontend-root) textarea { font: inherit; }
+:where(.midplat-frontend-root) h1,
+:where(.midplat-frontend-root) h2,
+:where(.midplat-frontend-root) h3 { margin: 0; font-weight: 600; letter-spacing: 0; line-height: 1.2; }
+:where(.midplat-frontend-root) h1 { font-size: 26px; }
+:where(.midplat-frontend-root) h2 { font-size: 22px; }
+:where(.midplat-frontend-root) h3 { font-size: 18px; }
+:where(.midplat-frontend-root) p { line-height: 1.6; }
+.midplat-frontend-root ::selection { background: rgba(59,130,246,.32); }
+.midplat-frontend-root ::-webkit-scrollbar { width: 6px; height: 6px; }
+.midplat-frontend-root ::-webkit-scrollbar-track { background: transparent; }
+.midplat-frontend-root ::-webkit-scrollbar-thumb { background: rgba(148,163,184,.25); border-radius: 3px; }
+.midplat-frontend-root ::-webkit-scrollbar-thumb:hover { background: rgba(148,163,184,.42); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* ---- 应用骨架：顶栏（仅 standalone）+ 可滚动内容区 + 粒子背景 ---- */
+.app-layout {
+  position: relative; z-index: auto;
+  height: 100%; min-height: 0; overflow: hidden; background: transparent;
+  display: flex; flex-direction: column;
+}
+/* 嵌入页面必须由子应用根绘制主题底色。 */
+.midplat-frontend-root.app-layout { background: var(--bg); }
+.app-content { min-width: 0; min-height: 0; flex: 1; overflow-y: auto; padding: 24px 28px 32px; }
+/* 粒子背景留在子应用壳内，不使用 fixed，避免铺满宿主视口 */
+.cube-field { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.cube-field canvas { display: block; width: 100%; height: 100%; }
+.app-layout > .topbar,
+.app-layout > .app-content { position: relative; z-index: 1; }
+/* antd Layout 默认背景会盖住粒子 canvas —— 内容区必须透明 */
+.app-layout > .mp-ant-layout, .app-layout > .mp-ant-layout > .app-content { background: transparent; }
+[data-theme='light'] .app-content { background: rgba(243,245,249,.28); }
+[data-theme='light'] .cube-field canvas {
+  opacity: 1;
+  /* 亮色下反相为深色粒子：加深对比、略压亮度 */
+  filter: invert(1) hue-rotate(180deg) saturate(1.55) contrast(1.22) brightness(.96);
+}
+/* 主题开关基础样式；两种形态的位置分别在 shell-standalone / shell-embedded 里 */
+.theme-toggle {
+  width: 40px; height: 40px; min-width: 40px; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface-sunken); color: var(--muted); cursor: pointer;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+.theme-toggle:hover { color: var(--text); border-color: var(--primary-line); background: var(--primary-lt); }
+.theme-toggle:active { transform: scale(.96); }
+.theme-toggle:focus-visible { outline: none; box-shadow: var(--ring); }
+
+@media (max-width: 1024px) { .app-content { padding: 16px; } }
+@media (max-width: 768px) { .app-content { padding: 16px 12px 24px; } }
+@media (max-width: 640px) { [data-theme='light'] .cube-field canvas { opacity: .42; } }

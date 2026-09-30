@@ -1,0 +1,19 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS midplat-app
+
+# Existing release snapshots pin this exact JVM environment in addition to their JAR.
+FROM maven@sha256:e8ef73dbd33b69fe497fd96b3bbbd85aff84ac4c564a5784ab02ad941b32c12b
+
+ENV TZ=Asia/Shanghai \
+    JAVA_OPTS="-Xms512m -Xmx1024m" \
+    FUSION_RUNTIME_IMAGE_DIGEST="sha256:a4a7a34e8321c5e83b5b1fb11e1cd00e709e2887175f97269e1e3e91dadbf3a1"
+WORKDIR /app
+COPY --from=midplat-app /app/app.jar /app/app.jar
+COPY --from=midplat-app /app/entrypoint.sh /app/entrypoint.sh
+
+# The seed directory contains only immutable runtime JARs named by their SHA-256.
+# Both middle-platform containers use this same resulting image.
+COPY fusion-runtime-history/ /app/fusion-runtime-history/
+
+EXPOSE 8090
+ENTRYPOINT ["sh", "/app/entrypoint.sh"]

@@ -1,0 +1,117 @@
+.capability-assets-search { width: 240px; }
+.capability-assets-count { margin-left: auto; color: var(--faint); font-size: 12px; }
+
+/* 资产卡片 */
+.asset-card { gap: 10px; }
+.asset-head { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.asset-icon {
+  display: grid; place-items: center; flex-shrink: 0;
+  width: 34px; height: 34px; border-radius: 9px;
+}
+.asset-title { min-width: 0; display: grid; gap: 2px; }
+.asset-name {
+  border: 0; background: none; padding: 0; cursor: pointer;
+  font-size: 14px; font-weight: 600; line-height: 1.3; color: var(--text); text-align: left;
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.asset-name:hover { color: var(--primary); }
+.asset-sub {
+  margin: 0; font-size: 12px; color: var(--muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.asset-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.asset-meta :is(.ant-tag, .mp-ant-tag) { margin: 0; }
+.asset-rev { font-size: 12px; color: var(--muted); }
+.asset-rev code { font-size: 11px; }
+.asset-usage {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  font-size: 12px; color: var(--muted);
+  border-top: 1px solid var(--line); padding-top: 10px; margin-top: auto;
+}
+.asset-usage > span + span::before { content: '·'; margin-right: 6px; color: var(--faint); }
+.asset-sync-ok { color: var(--green); }
+.asset-sync-failed { color: #e5484d; font-weight: 500; }
+.asset-sync-pending { color: var(--yellow); }
+.asset-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.asset-actions .asset-danger { margin-left: auto; }
+
+/* 类型徽标配色（卡片图标与 chip 共用） */
+.asset-chip-skill { background: var(--primary-lt); color: var(--primary); border-color: transparent; }
+.asset-chip-tool { background: rgba(245,158,11,.13); color: #b7770a; border-color: transparent; }
+.asset-chip-knowledge { background: rgba(20,184,166,.13); color: #0e9f8f; border-color: transparent; }
+.asset-chip-data { background: rgba(34,211,238,.13); color: #0891b2; border-color: transparent; }
+.asset-chip-model { background: var(--primary-lt); color: var(--primary); border-color: transparent; }
+.asset-chip-prompt { background: rgba(167,139,250,.15); color: #a78bfa; border-color: transparent; }
+
+.asset-pagination { display: flex; justify-content: flex-end; margin-top: 16px; }
+
+.capability-assets-name { padding-inline: 0; height: auto; }
+.capability-assets-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.capability-assets-meta { margin: 0 0 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.capability-assets-muted { color: var(--muted); font-size: 12px; }
+.capability-assets-error { color: #e5484d; font-size: 12px; word-break: break-all; }
+
+.capability-asset-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0 16px;
+}
+
+.capability-asset-code {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.6;
+  max-height: 260px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.capability-asset-docs { display: grid; gap: 10px; margin-bottom: 16px; }
+.capability-asset-docs .comp { padding: 10px 12px; }
+
+.capability-asset-doc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 4px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.capability-asset-doc-row {
+  position: relative;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  padding: 10px 12px 0;
+  margin-bottom: 10px;
+}
+
+.capability-asset-doc-remove { position: absolute; top: 8px; right: 8px; }
+.capability-asset-doc-empty { color: var(--muted); font-size: 12px; margin-bottom: 12px; }
+
+.capability-assets-tool-view p { margin: 0 0 8px; }
+
+.capability-assets-grant-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.capability-assets-grant-add {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}

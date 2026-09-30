@@ -1,0 +1,22 @@
+/* ============================================================
+ * 数智大脑全局样式入口（按层导入，顺序即层叠优先级）
+ *
+ * 运行形态（src/runtimeShell.ts 判定，写在子应用根的 data-shell 上）：
+ *  - standalone：单独访问，本应用拥有整页（html/body/顶栏）；
+ *  - embedded：挂载在主应用 qiankun 里，只能作用于 .midplat-frontend-root 内部。
+ *
+ *  1. tokens            设计令牌；standalone 挂 html，embedded 只挂子应用根
+ *  2. base              元素基础样式与应用骨架（限定在子应用根内）
+ *  3. components        两种形态共用的业务组件
+ *  4. buttons           按钮体系
+ *  5. home              /home 门户首页（首屏视频、应用目录、命令面板、应用星球）
+ *  6. shell-standalone  仅单独访问：品牌顶栏与水平主导航
+ *  7. shell-embedded    仅挂载主应用：宿主 reset 防护与悬浮主题开关
+ * ============================================================ */
+@import './styles/tokens.css';
+@import './styles/base.css';
+@import './styles/components.css';
+@import './styles/buttons.css';
+@import './styles/home.css';
+@import './styles/shell-standalone.css';
+@import './styles/shell-embedded.css';

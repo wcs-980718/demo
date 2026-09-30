@@ -1,0 +1,73 @@
+/* ============================================================
+ * 设计令牌 —— 「精密仪器」基调：深海军蓝底、单一冷蓝主色、细发丝线描边，
+ * 青色只用于「在线 / 运行中」信号，不做大面积渐变与霓虹。
+ *
+ * 作用域按运行形态区分（见 src/runtimeShell.ts）：
+ *  - standalone：令牌挂在 <html>，body 底色也由本应用绘制；
+ *  - embedded：<html> 属于主应用，令牌只挂在子应用根 .midplat-frontend-root，
+ *    避免 --primary / --text 等同名变量与 color-scheme 污染宿主。
+ * 两种形态 <html> 上都有 data-theme；embedded 额外有 .midplat-in-qiankun。
+ * ============================================================ */
+html:not(.midplat-in-qiankun),
+.midplat-frontend-root {
+  color-scheme: dark;
+  --bg: #070c17;
+  --surface: rgba(12,19,33,.88);
+  --surface-solid: #0e1627;
+  --surface-raised: #121c30;
+  --surface-sunken: rgba(148,163,184,.055);
+  --border: rgba(148,163,184,.17);
+  --border-strong: rgba(148,163,184,.3);
+  --line: rgba(148,163,184,.10);
+  --text: #e6edf7;
+  --muted: #a4b1c5;
+  --faint: #7a889e;
+  --navy: #7db3ff; --cyan: #22d3ee; --teal: #2dd4bf; --amber: #fbbf24; --rose: #fb7185; --violet: #a78bfa;
+  --primary: #3b82f6; --primary-hover: #2563eb; --primary-lt: rgba(59,130,246,.15); --primary-line: rgba(96,165,250,.45);
+  --signal: #22d3ee;
+  --green: #34d399; --green-lt: rgba(52,211,153,.13);
+  --red: #f87171; --red-lt: rgba(248,113,113,.13);
+  --yellow: #fbbf24; --yellow-lt: rgba(251,191,36,.12);
+  --seg-active-bg: rgba(59,130,246,.2); --seg-active-text: #ffffff;
+  --scrim: rgba(7,12,23,.66);
+  --code-bg: #0a1122; --code-text: #c9d4e6;
+  --radius: 8px; --radius-lg: 10px; --radius-xl: 14px;
+  /* 面板顶部 1px 高光：仪表盘面板的「倒角」感，替代大投影 */
+  --shadow-sm: inset 0 1px 0 rgba(255,255,255,.045), 0 1px 2px rgba(0,0,0,.32);
+  --shadow-md: inset 0 1px 0 rgba(255,255,255,.05), 0 14px 32px -12px rgba(0,0,0,.6);
+  --ring: 0 0 0 3px rgba(59,130,246,.32);
+  --font-ui-cn: "HarmonyOS Sans SC", MiSans, "Alibaba PuHuiTi 3.0", "Source Han Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-display-cn: "HarmonyOS Sans SC", MiSans, "Alibaba PuHuiTi 3.0", "Source Han Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --ease: cubic-bezier(.2,.7,.2,1);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+html:not(.midplat-in-qiankun)[data-theme='light'],
+[data-theme='light'] .midplat-frontend-root {
+  color-scheme: light;
+  --bg: #f3f5f9;
+  --surface: rgba(255,255,255,.95);
+  --surface-solid: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-sunken: rgba(15,23,42,.035);
+  --border: rgba(15,23,42,.11);
+  --border-strong: rgba(15,23,42,.22);
+  --line: rgba(15,23,42,.07);
+  --text: #111c2e;
+  --muted: #4b5970;
+  --faint: #778499;
+  --navy: #2563eb; --cyan: #0e7490; --teal: #0f766e; --amber: #b45309; --rose: #be123c; --violet: #6d28d9;
+  --primary: #2563eb; --primary-hover: #1d4ed8; --primary-lt: rgba(37,99,235,.08); --primary-line: rgba(37,99,235,.34);
+  --signal: #0891b2;
+  --green: #047857; --green-lt: rgba(5,150,105,.10);
+  --red: #dc2626; --red-lt: rgba(220,38,38,.08);
+  --yellow: #a16207; --yellow-lt: rgba(202,138,4,.10);
+  --seg-active-bg: #ffffff; --seg-active-text: #1d4ed8;
+  --scrim: rgba(243,245,249,.72);
+  --code-bg: #0f172a; --code-text: #e2e8f0;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.06);
+  --shadow-md: 0 14px 30px -14px rgba(15,23,42,.22);
+  --ring: 0 0 0 3px rgba(37,99,235,.2);
+}

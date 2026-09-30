@@ -1,0 +1,28 @@
+/* ============================================================
+ * embedded 形态专属：挂载在主应用（qiankun）里。
+ * 主应用负责顶栏、导航与 html/body，本应用只在 .midplat-frontend-root 里工作：
+ *  - 不渲染自有顶栏，只保留一个悬浮主题开关；
+ *  - 抵挡宿主全局 reset 渗入（标题、链接颜色）。
+ * ============================================================ */
+
+/* 宿主的全局 reset 会刷进本应用（如 h1-h6 深色标题、a 深色链接）。
+   :where() 零权重，只压过元素级 reset，业务类级规则仍可覆盖。 */
+[id='midplat-root'] :where(h1, h2, h3, h4, h5, h6) { color: var(--text); }
+[id='midplat-root'] :where(a) { color: var(--primary); }
+
+/* 悬浮主题开关放在内容区右下角：不压页面右上角的主操作按钮（新建 / 刷新等）。
+   .app-layout 不滚动、.app-content 滚动，所以 absolute 相对子应用壳固定在可视区。 */
+[data-shell='embedded'] .theme-toggle-float {
+  position: absolute; right: 20px; bottom: 20px; z-index: 40;
+  width: 38px; height: 38px; min-width: 38px; border-radius: var(--radius-lg);
+  color: var(--muted); background: var(--surface-raised); border-color: var(--border);
+  box-shadow: var(--shadow-md);
+  opacity: .82;
+}
+[data-shell='embedded'] .theme-toggle-float:hover,
+[data-shell='embedded'] .theme-toggle-float:focus-visible {
+  opacity: 1; color: var(--text); border-color: var(--primary-line);
+}
+@media (max-width: 768px) {
+  [data-shell='embedded'] .theme-toggle-float { right: 12px; bottom: 12px; }
+}

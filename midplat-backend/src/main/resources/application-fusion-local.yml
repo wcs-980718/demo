@@ -1,0 +1,24 @@
+server:
+  address: 127.0.0.1
+  servlet:
+    session:
+      cookie:
+        same-site: strict
+        http-only: true
+spring:
+  datasource:
+    url: ${FUSION_MIDPLAT_DB_URL:jdbc:postgresql://127.0.0.1:5432/midplat_fusion_dev}
+    username: ${FUSION_MIDPLAT_DB_USER:${USER}}
+    password: ${FUSION_MIDPLAT_DB_PASSWORD:}
+midplat:
+  fusion:
+    execution-enabled: ${FUSION_EXECUTION_ENABLED:false}
+    execution-key: ${FUSION_EXECUTION_KEY:}
+    enabled: true
+    local-auth: true
+    block-legacy-outbound: true
+    service-token: ${FUSION_SERVICE_TOKEN}
+    agent-url: ${FUSION_AGENT_URL:http://127.0.0.1:8742}
+  agent:
+    root-cause:
+      base-url: http://127.0.0.1:9/v1

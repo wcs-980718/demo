@@ -1,0 +1,35 @@
+{
+  "name": "midplat-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "max dev --port 8000",
+    "test": "node --test tests/*.test.cjs",
+    "test:usage-browser": "playwright test tests/usage.spec.cjs --workers=1",
+    "test:workflow-browser": "playwright test tests/workflow.spec.cjs --workers=1",
+    "test:agent-lifecycle-browser": "playwright test tests/agentLifecycle.spec.cjs --workers=1",
+    "build": "max build",
+    "preview": "max preview --host 0.0.0.0",
+    "setup": "max setup"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.3.0",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@tanstack/react-query": "^5.28.0",
+    "@umijs/max": "^4.6.68",
+    "@xyflow/react": "12.11.6",
+    "antd": "^6.4.4",
+    "axios": "^1.6.7",
+    "lucide-react": "^0.344.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "typescript": "^5.3.3"
+  }
+}

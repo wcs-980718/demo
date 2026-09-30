@@ -1,0 +1,147 @@
+/* ============================================================
+ * standalone 形态专属：单独访问时的品牌顶栏与水平主导航。
+ * 这些节点只在 data-shell="standalone" 下渲染（见 layouts/index.tsx 的 StandaloneTopbar），
+ * 选择器统一加 [data-shell='standalone'] 前缀，嵌入主应用时不会命中。
+ * ============================================================ */
+[data-shell='standalone'] .topbar {
+  position: relative; z-index: 10;
+  display: grid; grid-template-columns: minmax(210px, 1fr) auto minmax(210px, 1fr);
+  align-items: center; gap: 24px;
+  height: 64px; min-height: 64px; padding: 0 28px;
+  background: linear-gradient(180deg, rgba(11,17,30,.97), rgba(8,13,24,.95));
+  border-bottom: 1px solid rgba(148,163,184,.12);
+  box-shadow: 0 10px 28px -16px rgba(0,0,0,.7);
+}
+/* 底边一道冷光接缝：科幻感只落在这一处细线上 */
+[data-shell='standalone'] .topbar::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent 4%, rgba(59,130,246,.55) 32%, rgba(34,211,238,.5) 50%, rgba(59,130,246,.55) 68%, transparent 96%);
+  opacity: .6;
+}
+[data-shell='standalone'] .topbar-brand-slot { min-width: 0; justify-self: start; }
+[data-shell='standalone'] .brand {
+  display: flex; align-items: center; gap: 11px; min-width: 0; padding: 4px 6px; margin-left: -6px;
+  border: 0; border-radius: 10px; background: transparent; color: inherit; text-align: left; cursor: pointer;
+  transition: background-color 180ms ease;
+}
+[data-shell='standalone'] .brand:hover { background: rgba(255,255,255,.06); }
+[data-shell='standalone'] .brand:focus-visible { outline: none; box-shadow: var(--ring); }
+[data-shell='standalone'] .brand-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; flex: 0 0 36px;
+  border-radius: 10px; background: linear-gradient(145deg, #2563eb 8%, #0ea5e9 62%, #22d3ee 100%); color: #ffffff;
+  box-shadow: 0 6px 16px -6px rgba(37,99,235,.6), inset 0 1px 0 rgba(255,255,255,.3);
+}
+[data-shell='standalone'] .brand-copy { display: grid; gap: 3px; min-width: 0; }
+[data-shell='standalone'] .brand-title {
+  display: block; color: #ffffff !important; font-family: var(--font-display-cn);
+  font-size: 16px; font-weight: 700; letter-spacing: .06em; line-height: 1.08; white-space: nowrap;
+  text-rendering: geometricPrecision;
+}
+[data-shell='standalone'] .brand-subtitle {
+  display: block; color: rgba(214,226,244,.6) !important; font-family: var(--font-mono);
+  font-size: 9.5px; font-weight: 500; letter-spacing: .2em; line-height: 1.15; white-space: nowrap;
+}
+
+[data-shell='standalone'] .nav-loading { padding: 0 16px; }
+[data-shell='standalone'] .topbar-nav { min-width: 0; justify-self: center; display: flex; align-items: center; }
+[data-shell='standalone'] .top-menu {
+  flex: none; width: max-content; min-width: 0; background: transparent !important; border-bottom: 0 !important;
+}
+[data-shell='standalone'] .top-menu .mp-ant-menu-item,
+[data-shell='standalone'] .top-menu .mp-ant-menu-submenu-title {
+  color: rgba(226,234,246,.82) !important;
+  font-size: 14px; border-radius: 0 !important; margin: 0 2px !important;
+  transition: color 180ms ease !important;
+}
+[data-shell='standalone'] .top-menu .mp-ant-menu-item:hover,
+[data-shell='standalone'] .top-menu .mp-ant-menu-submenu-title:hover {
+  color: #ffffff !important; background: transparent !important;
+}
+/* 指示条：2px 细线，选中时带一点点同色辉光 */
+[data-shell='standalone'] .top-menu .mp-ant-menu-item::after,
+[data-shell='standalone'] .top-menu.mp-ant-menu-horizontal > .mp-ant-menu-submenu::after {
+  content: ''; position: absolute; left: 14px; right: 14px; bottom: 0; height: 2px;
+  border: 0 !important; border-radius: 2px 2px 0 0; background: transparent; transition: background 180ms ease, box-shadow 180ms ease;
+}
+[data-shell='standalone'] .top-menu .mp-ant-menu-submenu-title::after { border: 0 !important; background: none !important; }
+[data-shell='standalone'] .top-menu .mp-ant-menu-item:hover::after,
+[data-shell='standalone'] .top-menu.mp-ant-menu-horizontal > .mp-ant-menu-submenu:hover::after { background: rgba(255,255,255,.28); }
+[data-shell='standalone'] .top-menu .mp-ant-menu-item-selected,
+[data-shell='standalone'] .top-menu .mp-ant-menu-submenu-selected .mp-ant-menu-submenu-title {
+  color: #ffffff !important; font-weight: 600; background: transparent !important;
+}
+[data-shell='standalone'] .top-menu .mp-ant-menu-item-selected::after,
+[data-shell='standalone'] .top-menu.mp-ant-menu-horizontal > .mp-ant-menu-submenu-selected::after {
+  background: #3b82f6 !important; box-shadow: 0 0 10px rgba(59,130,246,.7);
+}
+[data-shell='standalone'] .top-menu .mp-ant-menu-submenu-arrow,
+[data-shell='standalone'] .top-menu .mp-ant-menu-submenu-arrow::before,
+[data-shell='standalone'] .top-menu .mp-ant-menu-submenu-arrow::after { color: rgba(255,255,255,.6); }
+/* 顶部菜单 hover 弹出的子菜单（弹层挂在子应用根内） */
+[data-shell='standalone'] .mp-ant-menu-submenu-popup .mp-ant-menu {
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+  padding: 6px; background: var(--surface-raised); border: 1px solid var(--border);
+}
+[data-shell='standalone'] .mp-ant-menu-submenu-popup .mp-ant-menu-item { border-radius: 6px; color: var(--text); }
+[data-shell='standalone'] .mp-ant-menu-submenu-popup .mp-ant-menu-item:hover { color: var(--text); background: var(--primary-lt); }
+[data-shell='standalone'] .mp-ant-menu-submenu-popup .mp-ant-menu-item-selected {
+  color: #ffffff; background: var(--primary); font-weight: 600;
+}
+
+[data-shell='standalone'] .topbar-right { justify-self: end; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+[data-shell='standalone'] .topbar .theme-toggle {
+  color: rgba(226,234,246,.86); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.14);
+}
+[data-shell='standalone'] .topbar .theme-toggle:hover {
+  color: #ffffff; background: rgba(255,255,255,.1); border-color: rgba(125,179,255,.5);
+}
+
+/* ---- 浅色主题顶栏：冷白玻璃，接缝线保留但更淡 ---- */
+[data-theme='light'] [data-shell='standalone'] .topbar {
+  background: rgba(255,255,255,.92);
+  border-bottom-color: rgba(15,23,42,.08);
+  box-shadow: 0 8px 22px -16px rgba(15,23,42,.28);
+  backdrop-filter: saturate(1.4) blur(10px);
+}
+[data-theme='light'] [data-shell='standalone'] .topbar::after { opacity: .35; }
+[data-theme='light'] [data-shell='standalone'] .brand-title { color: #111c2e !important; }
+[data-theme='light'] [data-shell='standalone'] .brand-subtitle { color: #64748b !important; }
+[data-theme='light'] [data-shell='standalone'] .brand:hover { background: rgba(37,99,235,.055); }
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-item,
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-submenu-title { color: #334155 !important; }
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-item:hover,
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-submenu-title:hover,
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-item-selected,
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-submenu-selected .mp-ant-menu-submenu-title { color: #1d4ed8 !important; }
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-item:hover::after,
+[data-theme='light'] [data-shell='standalone'] .top-menu.mp-ant-menu-horizontal > .mp-ant-menu-submenu:hover::after { background: rgba(37,99,235,.28); }
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-item-selected::after,
+[data-theme='light'] [data-shell='standalone'] .top-menu.mp-ant-menu-horizontal > .mp-ant-menu-submenu-selected::after {
+  background: #2563eb !important; box-shadow: none;
+}
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-submenu-arrow,
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-submenu-arrow::before,
+[data-theme='light'] [data-shell='standalone'] .top-menu .mp-ant-menu-submenu-arrow::after { color: #64748b; }
+[data-theme='light'] [data-shell='standalone'] .topbar .theme-toggle { color: #334155; background: #f8fafc; border-color: rgba(15,23,42,.14); }
+[data-theme='light'] [data-shell='standalone'] .topbar .theme-toggle:hover { color: #1d4ed8; background: #eff6ff; border-color: rgba(37,99,235,.35); }
+
+@media (max-width: 1200px) {
+  [data-shell='standalone'] .topbar { grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; }
+  [data-shell='standalone'] .topbar-nav { width: 100%; justify-self: stretch; overflow: hidden; }
+  [data-shell='standalone'] .top-menu { width: 100%; }
+}
+@media (max-width: 768px) {
+  [data-shell='standalone'] .topbar { height: 56px; min-height: 56px; padding: 0 12px; gap: 10px; }
+  [data-shell='standalone'] .brand-subtitle { display: none; }
+  [data-shell='standalone'] .brand-mark { width: 34px; height: 34px; flex-basis: 34px; }
+  [data-shell='standalone'] .topbar-nav { overflow-x: auto; scrollbar-width: none; }
+  [data-shell='standalone'] .topbar-nav::-webkit-scrollbar { display: none; }
+  [data-shell='standalone'] .top-menu { width: max-content; min-width: max-content; }
+}
+@media (max-width: 560px) {
+  [data-shell='standalone'] .brand-copy { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-shell='standalone'] .brand { transition: none; }
+}

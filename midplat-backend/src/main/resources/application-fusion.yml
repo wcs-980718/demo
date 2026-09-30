@@ -1,0 +1,28 @@
+server:
+  port: ${FUSION_AGENT_PORT:8742}
+  address: ${FUSION_AGENT_BIND:127.0.0.1}
+  error:
+    include-message: never
+    include-exception: false
+    include-stacktrace: never
+spring:
+  datasource:
+    url: ${FUSION_AGENT_DB_URL}
+    username: ${FUSION_AGENT_DB_USER}
+    password: ${FUSION_AGENT_DB_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: true
+  flyway:
+    enabled: true
+    locations: classpath:fusion/db/migration
+fusion:
+  runtime-image-digest: ${FUSION_RUNTIME_IMAGE_DIGEST:local-jvm}
+  execution-enabled: ${FUSION_EXECUTION_ENABLED:false}
+  execution-key: ${FUSION_EXECUTION_KEY:}
+  runtime-directory: ${FUSION_RUNTIME_DIRECTORY:/data/runtime}
+  runtime-jar: ${FUSION_RUNTIME_JAR:}
+  max-runtime-units: ${FUSION_MAX_RUNTIME_UNITS:24}
+  self-url: ${FUSION_SELF_URL:http://127.0.0.1:8742}
+  service-token: ${FUSION_SERVICE_TOKEN}
+  midplat-url: ${FUSION_MIDPLAT_URL:http://127.0.0.1:8090}

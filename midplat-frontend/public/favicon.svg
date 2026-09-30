@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" data-brand-mark="neural-core">
+  <defs>
+    <linearGradient id="g" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB"/>
+      <stop offset=".58" stop-color="#0EA5E9"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="22" height="22" rx="5" fill="url(#g)"/>
+  <path d="M12 3.5v3.2M20.5 12h-3.2M12 20.5v-3.2M3.5 12h3.2M5.8 5.8l2.25 2.25M18.2 5.8l-2.25 2.25M18.2 18.2l-2.25-2.25M5.8 18.2l2.25-2.25" stroke="#fff" stroke-width="1.45" stroke-linecap="round"/>
+  <path d="m12 7.2 4.8 4.8-4.8 4.8L7.2 12 12 7.2Z" fill="#fff" fill-opacity=".18" stroke="#fff" stroke-width="1.55" stroke-linejoin="round"/>
+  <circle cx="12" cy="12" r="1.65" fill="#fff"/>
+  <circle cx="12" cy="3.5" r="1.2" fill="#fff"/>
+  <circle cx="20.5" cy="12" r="1.2" fill="#fff"/>
+  <circle cx="12" cy="20.5" r="1.2" fill="#fff"/>
+  <circle cx="3.5" cy="12" r="1.2" fill="#fff"/>
+</svg>
